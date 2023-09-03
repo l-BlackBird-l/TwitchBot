@@ -45,7 +45,7 @@
         <Border Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="20" x:Name="Mess" Opacity="0">
             <Grid Margin="50 10 10 0">
                 <StackPanel Margin="0 0 0 15" Orientation="Vertical">
-                    <Label Content="Add command" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="17" Margin="-30 0 0 2" FontWeight="Medium" />
+                    <Label Content="Add command" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="17" Margin="-30 0 0 2" FontWeight="Medium" x:Name="Caption"/>
                     <Separator Margin="-50 0 -10 20" DockPanel.Dock="Top" Height="0.8" Background="#7e5fdc"/>
                     <StackPanel Orientation="Horizontal" Margin="-40 0 0 0">
                         <TextBlock Text="Command" FontSize="13" FontWeight="DemiBold"/>
@@ -58,8 +58,8 @@
                     </StackPanel>
                     
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20 20 3 0">
-                        <Button x:Name="Accept" Content="Submit" Style="{StaticResource gridEditButton}" Margin="0 0 5 0" Background="#1d89cf" BorderBrush="#1d89cf"  Cursor="Hand" Click="Accept_Click"/>
-                        <Button x:Name="CloseWindow" Content="Cancel" Style="{StaticResource gridRemoveButton}" Background="#c2c2c2" BorderBrush="#c2c2c2" Cursor="Hand" Click="CloseWindow_Click" />
+                        <Button x:Name="Accept" Content="Submit" Style="{StaticResource gridEditButton}" Margin="0 0 5 0" Background="#6741d9"   Cursor="Hand" Click="Accept_Click"/>
+                        <Button x:Name="CloseWindow" Content="Cancel" Style="{StaticResource gridRemoveButton}" Background="#d32f2f" BorderBrush="#c2c2c2" Cursor="Hand" Click="CloseWindow_Click" />
                     </StackPanel>
                 </StackPanel>
 

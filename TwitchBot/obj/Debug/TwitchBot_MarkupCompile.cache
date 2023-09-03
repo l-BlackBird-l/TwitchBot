@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\User\GitHub\TwitchBot\TwitchBot\obj\Debug\
+C:\Users\User\source\repos\TwitchBot-main\TwitchBot\obj\Debug\
 TwitchBot
 none
 false
 DEBUG;TRACE
-C:\Users\User\GitHub\TwitchBot\TwitchBot\App.xaml
-3-1061147593
+C:\Users\User\source\repos\TwitchBot-main\TwitchBot\App.xaml
+3-903061982
 
-9-1386058028
-251733940095
+141685642565
+26530293083
 MainWindow.xaml;Pages\Commands.xaml;Pages\Message.xaml;
 
 False

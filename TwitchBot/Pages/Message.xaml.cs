@@ -21,9 +21,13 @@ namespace TwitchBot.Pages
     /// </summary>
     public partial class Message : UserControl
     {
-        public Message()
+        public Message(string MessageName = "Add command", string Name = "", string command = "")
         {
             InitializeComponent();
+            Caption.Content = MessageName;
+            CommandText.Text = Name;
+            CMD.Text  = command;
+
         }
 
         private void DoubleAnimationUsingKeyFrames_Completed(object sender, EventArgs e)
@@ -46,12 +50,13 @@ namespace TwitchBot.Pages
                     }
                 }
                 Command command = new Command();
-                command.Number = mainWindow.commands.Count;
+                command.Number = mainWindow.commands.Count + 1;
                 command.Cmd = CMD.Text;
                 command.CommandText = CommandText.Text;
                 mainWindow.commands.Add(command);
-                mainWindow.WriteToFile();
-                MessageBox.Show("Command added.", "TwitchBot");
+                mainWindow.cmd.Add(command);
+                FileManager fileManager = new FileManager();
+                fileManager.WriteToFileCommands(mainWindow.commands);
 
                 var animation = (Storyboard)FindResource("Storyboard3");
                 animation.Begin();

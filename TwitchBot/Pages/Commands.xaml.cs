@@ -27,60 +27,58 @@ namespace TwitchBot.Pages
         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
 
 
-
-
         public Commands()
         {
             InitializeComponent();
-            /*
-            List<Command> com1 = new List<Command>();
-            Command command = new Command();
-            command.Number = 0;
-            command.Cmd = "!lox";
-            command.CommandText = "Лох на 100%";
-            com1.Add(command);
-
-            Command command1 = new Command();
-            command1.Number = 1;
-            command1.Cmd = "!tt";
-            command1.CommandText = "Подписывайтесь на тт";
-            com1.Add(command1);
-
-            WriteToFile(com1);
-            */
             
+            FileManager file   = new FileManager();
+            mainWindow.commands = file.ReadFromFileCommands();
 
-            mainWindow.commands = mainWindow.ReadFromFile();
-            ObservableCollection<Command> cmd = new ObservableCollection<Command>();
-            
-            foreach(var i in mainWindow.commands)
+            foreach (var i in mainWindow.commands)
             {
-                cmd.Add(i);
+                mainWindow.cmd.Add(i);
             }
-            membersDataGrid.ItemsSource = cmd;
-            
-            /*
-            ObservableCollection<Command> members = new ObservableCollection<Command>();
-
-
-            members.Add(new Command { Number = 1, Cmd = "!lox", CommandText = "{e.Command.ChatMessage.DisplayName} лох на {Random(0, 100)}%" });
-            members.Add(new Command { Number = 2, Cmd = "!tg", CommandText = "https://t.me/valg_art"});
-            members.Add(new Command { Number = 3, Cmd = "!tt", CommandText = "https://www.tiktok.com/@valg_art" });
-            members.Add(new Command { Number = 4, Cmd = "!vk", CommandText = "https://vk.com/valg_art" });
-            members.Add(new Command { Number = 5, Cmd = "!бейбик", CommandText = "{e.Command.ChatMessage.DisplayName} будет бейбик с {RandomNick()}" });
-            members.Add(new Command { Number = 6, Cmd = "!бзбзбз", CommandText = "{e.Command.ChatMessage.DisplayName} делает бзбзбз" });
-
-
-            membersDataGrid.ItemsSource = members;
-            */
+            membersDataGrid.ItemsSource = mainWindow.cmd;
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
            Message message = new Message();
-            mainWindow.WorkingArea.Children.Add(message);
+           mainWindow.WorkingArea.Children.Add(message);
+        }
 
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            var commands = mainWindow.commands;
+            Message message = new Message("Edit command", mainWindow.commands[membersDataGrid.SelectedIndex].CommandText, mainWindow.commands[membersDataGrid.SelectedIndex].Cmd);
+
+            mainWindow.WorkingArea.Children.Add(message);
+        }
+
+
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            int SelectedIndex = membersDataGrid.SelectedIndex;
+
+            mainWindow.commands.RemoveAt(SelectedIndex);
+            mainWindow.cmd.RemoveAt(SelectedIndex);
+
+            UpdateAllIndex();
+
+            membersDataGrid.ItemsSource = null; 
+            membersDataGrid.ItemsSource = mainWindow.cmd;
+
+            FileManager file = new FileManager();
+            file.WriteToFileCommands(mainWindow.commands);
+        }
+
+        private void UpdateAllIndex()
+        {
+            for (int i = 1; i < mainWindow.commands.Count + 1; i++)
+            {
+                mainWindow.commands[i - 1].Number = i;
+                mainWindow.cmd[i - 1].Number = i;
+            }
         }
     }
 }

@@ -11,5 +11,10 @@ namespace TwitchBot
         public int Number { get; set; }
         public string Cmd { get; set; }
         public string CommandText { get; set; }
+
+        public void UpdateIndex(int index)
+        {
+            Number = index;
+        }
     }
 }

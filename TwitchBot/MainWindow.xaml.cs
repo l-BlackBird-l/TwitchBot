@@ -25,37 +25,30 @@ namespace TwitchBot
     {
 
       public List<Command> commands = new List<Command>();
-
-      //  internal List<Command> Commands { get => commands; set => commands = value; }
-
+       public ObservableCollection<Command> cmd = new ObservableCollection<Command>();
         public MainWindow()
         {
             InitializeComponent();
+            Auth();
         }
 
-        public void WriteToFile()
+        void Auth()
         {
-            using (FileStream stream = new FileStream("Settings\\Commands.json", FileMode.Create))
-            using (StreamWriter writer = new StreamWriter(stream))
-            {
-                Encryptor encryptor = new Encryptor();
-                string json = JsonSerializer.Serialize(commands);
-                writer.Write(encryptor.Encrypt(json));
-            }
-        }
+            /*
+            FileManager file = new FileManager();
+            BotAuth botAuth = new BotAuth();
+            botAuth.ChannelName = "Valg_Art";
+            botAuth.BotName = "nervo4ka";
+            botAuth.Auth = "oauth:vf1j54ycd1pjevfrreq6lc3v7cooiu";
+            file.WriteAuthDate(botAuth);
+           
+            
+            FileManager file = new FileManager();
+            BotAuth botAuth = new BotAuth();
+            botAuth =  file.ReadAuthDate();
+            MessageBox.Show(botAuth.Auth);
+             */
 
-       public List<Command> ReadFromFile()
-        {
-            List<Command> command = new List<Command>();
-            //    RemoveEncryption("Settings\\Commands.json");
-            using (FileStream stream = new FileStream("Settings\\Commands.json", FileMode.Open))
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                Encryptor encryptor = new Encryptor();
-                string json = reader.ReadToEnd();
-                command = JsonSerializer.Deserialize<List<Command>>(encryptor.Decrypted(json));
-            }
-            return command;
         }
 
         private void Drag_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
